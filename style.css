@@ -80,12 +80,30 @@ button:hover { background: #1d4ed8; }
   margin-bottom: 1.25rem;
 }
 
+[aria-labelledby="tic-tac-toe-title"] {
+  border: 2px solid #f0abfc;
+  background: linear-gradient(135deg, #312e81, #701a75);
+  box-shadow: 0 12px 30px rgb(112 26 117 / 25%);
+}
+
+[aria-labelledby="tic-tac-toe-title"] h2 {
+  color: #fef08a;
+}
+
+[aria-labelledby="tic-tac-toe-title"] .game-status {
+  color: #f5d0fe;
+}
+
 .tic-tac-toe-board {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 0.5rem;
   width: min(100%, 18rem);
   margin: 0 auto 1.25rem;
+  padding: 0.5rem;
+  border: 2px solid #f0abfc;
+  border-radius: 14px;
+  background: #4c1d95;
 }
 
 .tic-tac-toe-cell {
@@ -93,21 +111,32 @@ button:hover { background: #1d4ed8; }
   aspect-ratio: 1;
   place-items: center;
   padding: 0;
-  border: 2px solid #2563eb;
-  border-radius: 8px;
-  background: #eff6ff;
-  color: #1e3a8a;
+  border: 2px solid #fef08a;
+  border-radius: 12px;
+  background: linear-gradient(145deg, #fb7185, #c026d3);
+  color: #fff;
   font-size: 2rem;
   font-weight: 700;
+  box-shadow: 0 3px 0 #86198f;
 }
 
 .tic-tac-toe-cell:hover {
-  background: #dbeafe;
+  background: linear-gradient(145deg, #facc15, #fb923c);
 }
 
 .tic-tac-toe-cell:focus-visible {
-  outline: 3px solid #93c5fd;
+  outline: 3px solid #67e8f9;
   outline-offset: 2px;
+}
+
+[aria-labelledby="tic-tac-toe-title"] .reset-button {
+  background: #06b6d4;
+  color: #082f49;
+  font-weight: 700;
+}
+
+[aria-labelledby="tic-tac-toe-title"] .reset-button:hover {
+  background: #67e8f9;
 }
 
 .choices {
