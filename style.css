@@ -80,6 +80,36 @@ button:hover { background: #1d4ed8; }
   margin-bottom: 1.25rem;
 }
 
+.tic-tac-toe-board {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0.5rem;
+  width: min(100%, 18rem);
+  margin: 0 auto 1.25rem;
+}
+
+.tic-tac-toe-cell {
+  display: grid;
+  aspect-ratio: 1;
+  place-items: center;
+  padding: 0;
+  border: 2px solid #2563eb;
+  border-radius: 8px;
+  background: #eff6ff;
+  color: #1e3a8a;
+  font-size: 2rem;
+  font-weight: 700;
+}
+
+.tic-tac-toe-cell:hover {
+  background: #dbeafe;
+}
+
+.tic-tac-toe-cell:focus-visible {
+  outline: 3px solid #93c5fd;
+  outline-offset: 2px;
+}
+
 .choices {
   display: flex;
   flex-wrap: wrap;
