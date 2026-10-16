@@ -62,9 +62,86 @@ button:hover { background: #1d4ed8; }
   font-size: 1.75rem;
 }
 
+.game-card {
+  margin-top: 3rem;
+  padding: 2rem;
+  border: 1px solid #e5e7eb;
+  border-radius: 12px;
+  background: #fff;
+  box-shadow: 0 8px 24px rgb(15 23 42 / 6%);
+}
+
+.game-card h2 {
+  margin-bottom: 0.5rem;
+  font-size: 1.75rem;
+}
+
+.game-card > p {
+  margin-bottom: 1.25rem;
+}
+
+.choices {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.75rem;
+}
+
+.choice-button {
+  min-width: 120px;
+}
+
+.choice-button:focus-visible,
+.reset-button:focus-visible {
+  outline: 3px solid #93c5fd;
+  outline-offset: 3px;
+}
+
+.game-result {
+  min-height: 3rem;
+  margin-top: 1.5rem;
+  color: #222 !important;
+  font-size: 1.1rem;
+  font-weight: 600;
+}
+
+.scoreboard {
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+  margin-bottom: 1.25rem;
+}
+
+.scoreboard p {
+  margin: 0;
+}
+
+.scoreboard strong {
+  display: block;
+  font-size: 1.5rem;
+}
+
+.reset-button {
+  background: #475569;
+}
+
+.reset-button:hover {
+  background: #334155;
+}
+
 footer {
   text-align: center;
   padding: 2rem;
   color: #999;
   font-size: 0.875rem;
+}
+
+@media (max-width: 480px) {
+  .game-card {
+    padding: 1.25rem 1rem;
+  }
+
+  .scoreboard {
+    gap: 1rem;
+  }
 }
