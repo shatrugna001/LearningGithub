@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Minimal Site</title>
+  <title>Rock Paper Scissors | MySite</title>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -39,6 +39,21 @@
         <button class="tic-tac-toe-cell" type="button" aria-label="Row 3, column 3"></button>
       </div>
       <button id="reset-tic-tac-toe" class="reset-button" type="button">New game</button>
+    <section class="game-card" aria-labelledby="game-title">
+      <h2 id="game-title">Rock Paper Scissors</h2>
+      <p>Choose your move and see if you can beat the computer.</p>
+      <div class="choices" role="group" aria-label="Choose rock, paper, or scissors">
+        <button class="choice-button" type="button" data-choice="rock">✊ Rock</button>
+        <button class="choice-button" type="button" data-choice="paper">✋ Paper</button>
+        <button class="choice-button" type="button" data-choice="scissors">✌️ Scissors</button>
+      </div>
+      <p id="game-result" class="game-result" aria-live="polite">Make your first move!</p>
+      <div class="scoreboard" aria-label="Score">
+        <p>You <strong id="player-score">0</strong></p>
+        <p>Computer <strong id="computer-score">0</strong></p>
+        <p>Draws <strong id="draw-score">0</strong></p>
+      </div>
+      <button id="reset-game" class="reset-button" type="button">Reset score</button>
     </section>
   </main>
 

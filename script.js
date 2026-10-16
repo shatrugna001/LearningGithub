@@ -21,52 +21,47 @@ main.addEventListener("click", (event) => {
   emojis.append(smile);
 });
 
-const ticTacToeCells = Array.from(document.querySelectorAll(".tic-tac-toe-cell"));
-const ticTacToeStatus = document.getElementById("tic-tac-toe-status");
-const winningLines = [
-  [0, 1, 2], [3, 4, 5], [6, 7, 8],
-  [0, 3, 6], [1, 4, 7], [2, 5, 8],
-  [0, 4, 8], [2, 4, 6],
-];
-let board = Array(9).fill("");
-let currentPlayer = "X";
-let gameOver = false;
+const gameChoices = ["rock", "paper", "scissors"];
+const gameResult = document.getElementById("game-result");
+const playerScore = document.getElementById("player-score");
+const computerScore = document.getElementById("computer-score");
+const drawScore = document.getElementById("draw-score");
+let scores = { player: 0, computer: 0, draws: 0 };
 
-ticTacToeCells.forEach((cell, index) => {
-  cell.addEventListener("click", () => {
-    if (gameOver || board[index]) {
-      return;
-    }
+document.querySelectorAll(".choice-button").forEach((button) => {
+  button.addEventListener("click", () => {
+    const playerChoice = button.dataset.choice;
+    const computerChoice = gameChoices[Math.floor(Math.random() * gameChoices.length)];
 
-    board[index] = currentPlayer;
-    cell.textContent = currentPlayer;
-    cell.setAttribute("aria-label", `${cell.getAttribute("aria-label")}, ${currentPlayer}`);
-
-    if (winningLines.some((line) => line.every((position) => board[position] === currentPlayer))) {
-      ticTacToeStatus.textContent = `Player ${currentPlayer} wins!`;
-      gameOver = true;
-      ticTacToeCells.forEach((gameCell) => {
-        gameCell.disabled = true;
-      });
-    } else if (board.every(Boolean)) {
-      ticTacToeStatus.textContent = "It's a draw!";
-      gameOver = true;
+    if (playerChoice === computerChoice) {
+      scores.draws++;
+      gameResult.textContent = `It's a draw! You both chose ${computerChoice}.`;
+    } else if (
+      (playerChoice === "rock" && computerChoice === "scissors") ||
+      (playerChoice === "paper" && computerChoice === "rock") ||
+      (playerChoice === "scissors" && computerChoice === "paper")
+    ) {
+      scores.player++;
+      gameResult.textContent = `You win! ${capitalize(playerChoice)} beats ${computerChoice}.`;
     } else {
-      currentPlayer = currentPlayer === "X" ? "O" : "X";
-      ticTacToeStatus.textContent = `Player ${currentPlayer}'s turn`;
+      scores.computer++;
+      gameResult.textContent = `Computer wins! ${capitalize(computerChoice)} beats ${playerChoice}.`;
     }
+
+    playerScore.textContent = scores.player;
+    computerScore.textContent = scores.computer;
+    drawScore.textContent = scores.draws;
   });
 });
 
-document.getElementById("reset-tic-tac-toe").addEventListener("click", () => {
-  board = Array(9).fill("");
-  currentPlayer = "X";
-  gameOver = false;
-  ticTacToeStatus.textContent = "Player X's turn";
-
-  ticTacToeCells.forEach((cell, index) => {
-    cell.textContent = "";
-    cell.disabled = false;
-    cell.setAttribute("aria-label", `Row ${Math.floor(index / 3) + 1}, column ${(index % 3) + 1}`);
-  });
+document.getElementById("reset-game").addEventListener("click", () => {
+  scores = { player: 0, computer: 0, draws: 0 };
+  playerScore.textContent = "0";
+  computerScore.textContent = "0";
+  drawScore.textContent = "0";
+  gameResult.textContent = "Score reset. Make your move!";
 });
+
+function capitalize(word) {
+  return word.charAt(0).toUpperCase() + word.slice(1);
+}
