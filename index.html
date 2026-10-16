@@ -23,6 +23,23 @@
     <button id="btn">Click me</button>
     <p id="message"></p>
     <div id="emojis" aria-label="Smiley emojis added by clicking"></div>
+
+    <section class="game-card" aria-labelledby="tic-tac-toe-title">
+      <h2 id="tic-tac-toe-title">Tic-Tac-Toe</h2>
+      <p id="tic-tac-toe-status" class="game-status" aria-live="polite">Player X's turn</p>
+      <div class="tic-tac-toe-board" role="group" aria-label="Tic-Tac-Toe board">
+        <button class="tic-tac-toe-cell" type="button" aria-label="Row 1, column 1"></button>
+        <button class="tic-tac-toe-cell" type="button" aria-label="Row 1, column 2"></button>
+        <button class="tic-tac-toe-cell" type="button" aria-label="Row 1, column 3"></button>
+        <button class="tic-tac-toe-cell" type="button" aria-label="Row 2, column 1"></button>
+        <button class="tic-tac-toe-cell" type="button" aria-label="Row 2, column 2"></button>
+        <button class="tic-tac-toe-cell" type="button" aria-label="Row 2, column 3"></button>
+        <button class="tic-tac-toe-cell" type="button" aria-label="Row 3, column 1"></button>
+        <button class="tic-tac-toe-cell" type="button" aria-label="Row 3, column 2"></button>
+        <button class="tic-tac-toe-cell" type="button" aria-label="Row 3, column 3"></button>
+      </div>
+      <button id="reset-tic-tac-toe" class="reset-button" type="button">New game</button>
+    </section>
   </main>
 
   <footer>&copy; 2026 MySite</footer>
