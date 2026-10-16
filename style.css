@@ -139,6 +139,93 @@ button:hover { background: #1d4ed8; }
   background: #67e8f9;
 }
 
+.memory-game {
+  border-color: #a7f3d0;
+  background: linear-gradient(145deg, #ecfdf5, #eff6ff);
+}
+
+.memory-game h2 {
+  color: #065f46;
+}
+
+.memory-stats {
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+  margin-bottom: 1rem;
+}
+
+.memory-stats p {
+  margin: 0;
+}
+
+.memory-stats strong {
+  color: #047857;
+  font-size: 1.2rem;
+}
+
+.memory-board {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 0.6rem;
+  max-width: 22rem;
+  margin: 0 auto;
+}
+
+.memory-card {
+  display: grid;
+  aspect-ratio: 1;
+  place-items: center;
+  padding: 0;
+  border: 2px solid #34d399;
+  border-radius: 12px;
+  background: linear-gradient(145deg, #0f766e, #2563eb);
+  color: #fff;
+  font-size: clamp(1.5rem, 8vw, 2.5rem);
+  box-shadow: 0 4px 0 #115e59;
+  transition: transform 160ms ease, background 160ms ease;
+}
+
+.memory-card:hover:not(:disabled) {
+  background: linear-gradient(145deg, #059669, #4f46e5);
+  transform: translateY(-2px);
+}
+
+.memory-card.is-revealed {
+  border-color: #fbbf24;
+  background: #fff;
+  color: #1f2937;
+  box-shadow: 0 4px 0 #d1d5db;
+  cursor: default;
+}
+
+.memory-card.is-matched {
+  border-color: #34d399;
+  background: #d1fae5;
+  box-shadow: 0 4px 0 #6ee7b7;
+  cursor: default;
+}
+
+.memory-card:focus-visible {
+  outline: 3px solid #f59e0b;
+  outline-offset: 3px;
+}
+
+.memory-status {
+  min-height: 1.6rem;
+  margin: 1rem 0 !important;
+  color: #065f46 !important;
+  font-weight: 600;
+}
+
+.memory-game .reset-button {
+  background: #047857;
+}
+
+.memory-game .reset-button:hover {
+  background: #065f46;
+}
+
 .choices {
   display: flex;
   flex-wrap: wrap;

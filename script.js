@@ -62,6 +62,100 @@ document.getElementById("reset-game").addEventListener("click", () => {
   gameResult.textContent = "Score reset. Make your move!";
 });
 
+const memorySymbols = ["🍋", "🌈", "⭐", "🐸"];
+const memoryBoard = document.getElementById("memory-board");
+const memoryMoves = document.getElementById("memory-moves");
+const memoryPairs = document.getElementById("memory-pairs");
+const memoryStatus = document.getElementById("memory-status");
+let firstMemoryCard = null;
+let memoryLocked = false;
+let memoryMoveCount = 0;
+let matchedPairCount = 0;
+let mismatchTimeout;
+
+function startMemoryGame() {
+  window.clearTimeout(mismatchTimeout);
+  firstMemoryCard = null;
+  memoryLocked = false;
+  memoryMoveCount = 0;
+  matchedPairCount = 0;
+  memoryMoves.textContent = "0";
+  memoryPairs.textContent = "0 / 4";
+  memoryStatus.textContent = "Find the matching pairs!";
+  memoryBoard.replaceChildren();
+
+  const cards = [...memorySymbols, ...memorySymbols];
+  for (let index = cards.length - 1; index > 0; index--) {
+    const randomIndex = Math.floor(Math.random() * (index + 1));
+    [cards[index], cards[randomIndex]] = [cards[randomIndex], cards[index]];
+  }
+
+  cards.forEach((symbol, index) => {
+    const card = document.createElement("button");
+    card.type = "button";
+    card.className = "memory-card";
+    card.dataset.symbol = symbol;
+    card.setAttribute("aria-label", `Card ${index + 1}, face down`);
+    card.setAttribute("aria-pressed", "false");
+    card.addEventListener("click", () => revealMemoryCard(card, index));
+    memoryBoard.append(card);
+  });
+}
+
+function revealMemoryCard(card, index) {
+  if (memoryLocked || card.disabled || card === firstMemoryCard) {
+    return;
+  }
+
+  card.textContent = card.dataset.symbol;
+  card.classList.add("is-revealed");
+  card.setAttribute("aria-label", `Card ${index + 1}, ${card.dataset.symbol}`);
+  card.setAttribute("aria-pressed", "true");
+
+  if (!firstMemoryCard) {
+    firstMemoryCard = card;
+    return;
+  }
+
+  memoryMoveCount++;
+  memoryMoves.textContent = memoryMoveCount;
+
+  if (firstMemoryCard.dataset.symbol === card.dataset.symbol) {
+    firstMemoryCard.classList.add("is-matched");
+    card.classList.add("is-matched");
+    firstMemoryCard.disabled = true;
+    card.disabled = true;
+    matchedPairCount++;
+    memoryPairs.textContent = `${matchedPairCount} / ${memorySymbols.length}`;
+    firstMemoryCard = null;
+
+    if (matchedPairCount === memorySymbols.length) {
+      memoryStatus.textContent = `You found every pair in ${memoryMoveCount} moves!`;
+    } else {
+      memoryStatus.textContent = "Match found! Keep going.";
+    }
+    return;
+  }
+
+  memoryLocked = true;
+  memoryStatus.textContent = "Not a match. Try again!";
+  const unmatchedCard = firstMemoryCard;
+  mismatchTimeout = window.setTimeout(() => {
+    [unmatchedCard, card].forEach((unmatched) => {
+      unmatched.textContent = "";
+      unmatched.classList.remove("is-revealed");
+      unmatched.setAttribute("aria-label", `Card ${[...memoryBoard.children].indexOf(unmatched) + 1}, face down`);
+      unmatched.setAttribute("aria-pressed", "false");
+    });
+    firstMemoryCard = null;
+    memoryLocked = false;
+    memoryStatus.textContent = "Find the matching pairs!";
+  }, 800);
+}
+
+document.getElementById("reset-memory-game").addEventListener("click", startMemoryGame);
+startMemoryGame();
+
 function capitalize(word) {
   return word.charAt(0).toUpperCase() + word.slice(1);
 }
